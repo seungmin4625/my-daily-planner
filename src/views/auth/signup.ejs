@@ -1,0 +1,29 @@
+<%- include('../common/head.ejs') %>
+  <link rel="stylesheet" href="/css/form.css">
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+  <% if (errorMessage) { %>
+    <div><%= errorMessage %></div>
+  <% } %>
+  <div class="box" style="margin-top: 2rem;">
+    <form class="login-form" action="/signup" method="post">
+      <h2>회원 가입</h2>
+      <div class="form-control">
+        <label for="email">아이디(이메일)</label>
+        <input type="email" name="email" id="email" />
+      </div>
+      <div class="form-control">
+        <label for="password">비밀번호</label>
+        <input type="password" name="password" id="password" />
+      </div>
+      <div class="form-control">
+        <label for="confirmPassword">비밀번호 확인</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" />
+      </div>
+      <div class="form-control">
+        <button type="submit">회원 가입</button>
+      </div>
+    </form>
+<%- include('../common/end.ejs') %>
