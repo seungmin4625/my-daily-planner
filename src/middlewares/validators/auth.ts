@@ -1,5 +1,6 @@
 import { body, check } from 'express-validator';
 import { User } from '../../models/user';
+import { NextFunction, Request, Response } from 'express';
 
 const emailValidator = () =>
   check('email')
@@ -36,4 +37,8 @@ const confirmPasswordValidator = () =>
     return true;
   });
 
-export { emailValidator, passwordValidator, confirmPasswordValidator };
+const isAuth = (req: Request, res: Response, next: NextFunction) => {
+  console.log(`isAuth: ${JSON.stringify(req.session)}`);
+};
+
+export { emailValidator, passwordValidator, confirmPasswordValidator, isAuth };

@@ -8,6 +8,7 @@ import sessionSequelize from 'connect-session-sequelize';
 import passport from 'passport';
 
 import authRoutes from './routes/auth';
+import homeRoutes from './routes/home';
 import logger from './utils/logger';
 import sequelize from './utils/database';
 
@@ -38,14 +39,7 @@ app.use(passport.authenticate('session'));
 
 //#region routes
 app.use('/auth', authRoutes);
-//#endregion
-
-//#region redirect
-// 아직 랜딩 페이지가 없음...
-app.get('/', (req, res, next) => {
-  console.log(`landing: ${JSON.stringify(req.user)}`);
-  res.redirect('/auth/signin');
-});
+app.use(homeRoutes);
 //#endregion
 
 //#region run server
