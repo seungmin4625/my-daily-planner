@@ -1,25 +1,17 @@
 import express from 'express';
-import {
-  getLogin,
-  postLogin,
-  getSignUp,
-  postSignUp,
-} from '../controllers/auth';
-import {
-  confirmPasswordValidator,
-  emailValidator,
-  passwordValidator,
-} from '../middlewares/validators/auth';
 
+import passport, { authenticate } from '../middlewares/oauth/passport';
+import { getGoogleOauth, getSignIn } from '../controllers/auth';
+
+passport();
 const router = express.Router();
 
-router.get('/', getLogin);
-router.post('/login', postLogin);
-router.get('/signup', getSignUp);
-router.post(
-  '/signup',
-  [emailValidator(), passwordValidator(), confirmPasswordValidator()],
-  postSignUp
+router.get('/signin', getSignIn);
+router.get('/google', authenticate('google', { scope: ['profile'] }));
+router.get(
+  '/google-oauth',
+  authenticate('google', { failureRedirect: '/' }),
+  getGoogleOauth,
 );
 
 export default router;

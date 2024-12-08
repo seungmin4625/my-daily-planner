@@ -1,31 +1,11 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../utils/database';
 
-// export const User = sequelize.define(
-//   'User',
-//   {
-//     id: {
-//       type: DataTypes.INTEGER,
-//       allowNull: false,
-//       primaryKey: true,
-//       autoIncrement: true,
-//     },
-//     email: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//     password: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//   },
-//   {}
-// );
-
 export class User extends Model {
   declare id: number;
   declare email: string;
-  declare password: string;
+  declare provider: string;
+  declare providerId: string;
 }
 
 User.init(
@@ -38,12 +18,16 @@ User.init(
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
-    password: {
+    provider: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    providerId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   },
   {
     sequelize,
